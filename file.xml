@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Resource v="1.2" xmlns="http://xml.metamug.net/resource/1.0">
+    <desc>File Download</desc>
+    <Request method="GET">
+        <Param name="file" type="text" minlength="2" required="true" />
+        <Execute classname="com.metamug.plugin.sftp.FileDownload" output="true">
+            <Arg name="host" value="your.host.net" />
+            <Arg name="user" value="server" />
+            <Arg name="password" value="password" />
+            <Arg name="dir" value="/home/user/projects/files" />
+        </Execute>
+    </Request>
+</Resource>
