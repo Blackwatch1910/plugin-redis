@@ -3,7 +3,8 @@ package jedisDemo;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.exceptions.JedisException;
- 
+
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -15,8 +16,8 @@ public class JedisMain  {
  
     private static JedisPool pool = null;
  
-    public JedisMain() {
-        pool = new JedisPool(redisHost, redisPort);
+    public JedisMain(String host, int port) {
+        pool = new JedisPool(host, port);
  
     }
  
@@ -82,6 +83,15 @@ public class JedisMain  {
             if (null != jedis)
                 pool.returnResource(jedis);
         }
+    }
+    
+    public InputStream download(String file) throws JedisException {
+        return Jedis.get(file);
+    }
+
+    public InputStream download(String file, String dir) throws JedisException {
+        Jedis.cd(dir);
+        return Jedis.get(file);
     }
  
     public static void main(String[] args){
